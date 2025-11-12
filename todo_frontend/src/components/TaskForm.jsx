@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CATEGORIES, PRIORITIES, EMPTY_TASK } from "../utils/constants";
 import { validateTask } from "../utils/validation";
+import { FiEdit3, FiPlus, FiSave, FiX, FiCalendar } from "react-icons/fi";
 
 /**
  * PUBLIC_INTERFACE
@@ -42,17 +43,20 @@ export default function TaskForm({ onSubmit, onCancel, initialTask }) {
         <div className="form-row">
           <label htmlFor="title">
             Title
-            <input
-              id="title"
-              name="title"
-              className="input"
-              value={task.title}
-              onChange={handleChange}
-              placeholder="e.g., Prepare project report"
-              aria-invalid={Boolean(errors.title)}
-              aria-describedby={errors.title ? "title-error" : undefined}
-              required
-            />
+            <div className="input-with-icon">
+              <FiEdit3 aria-hidden="true" className="input-leading-icon icon" />
+              <input
+                id="title"
+                name="title"
+                className="input"
+                value={task.title}
+                onChange={handleChange}
+                placeholder="e.g., Prepare project report"
+                aria-invalid={Boolean(errors.title)}
+                aria-describedby={errors.title ? "title-error" : undefined}
+                required
+              />
+            </div>
             {errors.title && (
               <span id="title-error" className="helper" role="alert">
                 {errors.title}
@@ -96,16 +100,19 @@ export default function TaskForm({ onSubmit, onCancel, initialTask }) {
 
           <label htmlFor="dueDate">
             Due date
-            <input
-              id="dueDate"
-              name="dueDate"
-              type="date"
-              className="input"
-              value={task.dueDate || ""}
-              onChange={handleChange}
-              aria-invalid={Boolean(errors.dueDate)}
-              aria-describedby={errors.dueDate ? "duedate-error" : undefined}
-            />
+            <div className="input-with-icon">
+              <FiCalendar aria-hidden="true" className="input-leading-icon icon" />
+              <input
+                id="dueDate"
+                name="dueDate"
+                type="date"
+                className="input"
+                value={task.dueDate || ""}
+                onChange={handleChange}
+                aria-invalid={Boolean(errors.dueDate)}
+                aria-describedby={errors.dueDate ? "duedate-error" : undefined}
+              />
+            </div>
             {errors.dueDate && (
               <span id="duedate-error" className="helper" role="alert">
                 {errors.dueDate}
@@ -129,10 +136,23 @@ export default function TaskForm({ onSubmit, onCancel, initialTask }) {
 
         <div className="section" style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "flex-end" }}>
           {onCancel && (
-            <button type="button" className="btn ghost" onClick={onCancel} aria-label="Cancel editing task">Cancel</button>
+            <button type="button" className="btn ghost" onClick={onCancel} aria-label="Cancel editing task">
+              <FiX aria-hidden="true" className="icon" />
+              <span>Cancel</span>
+            </button>
           )}
           <button type="submit" className="btn primary" aria-label={initialTask ? "Save changes" : "Add task"}>
-            {initialTask ? "Save changes" : "Add task"}
+            {initialTask ? (
+              <>
+                <FiSave aria-hidden="true" className="icon" />
+                <span>Save changes</span>
+              </>
+            ) : (
+              <>
+                <FiPlus aria-hidden="true" className="icon" />
+                <span>Add task</span>
+              </>
+            )}
           </button>
         </div>
       </div>

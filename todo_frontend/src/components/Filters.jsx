@@ -1,5 +1,6 @@
 import React from "react";
 import { DEFAULT_FILTERS } from "../utils/constants";
+import { FiSearch, FiRotateCcw, FiCheckCircle } from "react-icons/fi";
 
 /**
  * PUBLIC_INTERFACE
@@ -20,13 +21,16 @@ export default function Filters({ value, onChange, onClearCompleted }) {
       <div className="filters">
         <label htmlFor="query">
           Search
-          <input
-            id="query"
-            className="input"
-            placeholder="Search tasks..."
-            value={f.query}
-            onChange={(e) => set({ query: e.target.value })}
-          />
+          <div className="input-with-icon">
+            <FiSearch aria-hidden="true" className="input-leading-icon icon" />
+            <input
+              id="query"
+              className="input"
+              placeholder="Search tasks..."
+              value={f.query}
+              onChange={(e) => set({ query: e.target.value })}
+            />
+          </div>
         </label>
 
         <label htmlFor="filter-category">
@@ -89,10 +93,14 @@ export default function Filters({ value, onChange, onClearCompleted }) {
       </div>
 
       <div className="section" style={{ display: "flex", justifyContent: "flex-end" }}>
-        <button className="btn" onClick={() => onChange(DEFAULT_FILTERS)} aria-label="Reset filters">Reset</button>
+        <button className="btn" onClick={() => onChange(DEFAULT_FILTERS)} aria-label="Reset filters">
+          <FiRotateCcw aria-hidden="true" className="icon" />
+          <span>Reset</span>
+        </button>
         {onClearCompleted && (
           <button className="btn accent" style={{ marginLeft: 8 }} onClick={onClearCompleted} aria-label="Clear completed tasks">
-            Clear completed
+            <FiCheckCircle aria-hidden="true" className="icon" />
+            <span>Clear completed</span>
           </button>
         )}
       </div>

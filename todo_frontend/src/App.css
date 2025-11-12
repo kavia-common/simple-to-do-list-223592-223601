@@ -123,6 +123,46 @@
   gap: 10px;
 }
 
+/* Icons */
+.icon {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: -0.125em;
+}
+
+.icon-muted { color: var(--text-muted); }
+.icon-primary { color: var(--color-primary); }
+.icon-accent { color: var(--color-accent); }
+
+/* Buttons with icons should align nicely */
+.btn .icon {
+  flex-shrink: 0;
+}
+
+/* Inputs with leading icons wrapper */
+.input-with-icon {
+  position: relative;
+}
+
+.input-leading-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-500);
+  pointer-events: none;
+}
+
+.input-with-icon .input {
+  padding-left: 36px;
+}
+
+/* Filter chips/labels that include icons */
+.badge .icon {
+  margin-right: 4px;
+}
+
 .brand-icon {
   width: 36px;
   height: 36px;
@@ -254,4 +294,9 @@ label {
   padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0,0,0,0);
   white-space: nowrap; border: 0;
+}
+
+/* Dark-mode respect if user prefers dark scheme */
+@media (prefers-color-scheme: dark) {
+  .icon-muted { color: #9ca3af; }
 }
